@@ -128,6 +128,23 @@ def parse_args(argv=None):
         default='inventory',
         help='inventory/revenue/buy/sell'
     )
+
+    reportparser.add_argument(
+        '-ds',
+        '--date-search',
+        metavar='search date from',
+        default='0001-01-01',
+        help='[YYYY-MM-DD]'
+    )
+
+
+    reportparser.add_argument(
+        '-u',
+        '--until',
+        metavar='search date until',
+        default='9999-12-31',
+        help='[YYYY-MM-DD]'
+    )
     
     
     # Execute the parse_args() method
@@ -164,7 +181,7 @@ def parse_args(argv=None):
             filename = 'bought.csv'
         elif args.mode == 'sell':
             filename = 'sold.csv'
-        list = report_product(args.product_name, filename, args.mode)
+        list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
         print(f'\n{args.mode} report')
         print(table(list))
         

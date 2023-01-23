@@ -135,7 +135,7 @@ def find_product(product_name='0', filename='inventory.csv'):
             found_list.append(dict)
     return found_list
 
-
+################### Add expiration ##############################
 def report_product(product_name='0', filename='inventory.csv', mode='inventory', begin_date='0001-01-01', end_date='9999-12-31'):
     # Finds product in specified log between specified dates and returns list of dictionaries
     # Returns whole inventory-log if nothing is specified
