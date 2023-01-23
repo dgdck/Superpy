@@ -1,5 +1,6 @@
 import main
 import date
+import pytest
 
 testfile = r'tests\testfile.csv'
 
@@ -154,3 +155,8 @@ def test_report_product_sell():
     main.sold('apple', '2', '1.5')
     main.sold('pear', '2', '2')
     assert main.report_product('apple', 'sold.csv', 'sell') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'sell_date': '2022-01-07', 'sell_price': '1.5'}]
+
+
+def test_report_error():
+    with pytest.raises(ValueError):
+        main.report_product(begin_date='9999-12-30')

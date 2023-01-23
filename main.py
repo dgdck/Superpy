@@ -154,6 +154,8 @@ def report_product(product_name='0', filename='inventory.csv', mode='inventory',
                 time = convert_time(dict['sell_date'])
                 if time >= begin_date and time <= end_date:
                     final_list.append(dict)
+    if final_list == []:
+        raise ValueError(f'No record found between {begin_date} and {end_date}')
     return final_list
     
 
