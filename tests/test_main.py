@@ -133,7 +133,7 @@ def test_remove_product():
     assert main.csvreader(testfile) == [{'id': '2', 'update': 'stays'}]
 
 
-def test_report_product():
+def test_report_product_buy():
     main.reset()
     main.buy('apple', '2023-01-01', '2')
     main.buy('pear', '2023-01-01', '2')
@@ -147,3 +147,10 @@ def test_report_product():
     main.buy('apple', '2023-01-01', '2')
     main.buy('pear', '2023-01-01', '2')
     assert main.report_product(begin_date='2022-01-02', end_date='2022-01-03') == [{'amount': '2.0', 'buy_date': '2022-01-03', 'buy_id': '3', 'buy_price': '1.0', 'expiration_date': '2023-01-01', 'id': '3', 'product_name': 'apple'},{'amount': '2.0', 'buy_date': '2022-01-03', 'buy_id': '4', 'buy_price': '1.0', 'expiration_date': '2023-01-01', 'id': '4', 'product_name': 'pear'}]
+
+
+def test_report_product_sell():
+    date.advance_time(2)
+    main.sold('apple', '2', '1.5')
+    main.sold('pear', '2', '2')
+    assert main.report_product('apple', 'sold.csv', 'sell') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'sell_date': '2022-01-07', 'sell_price': '1.5'}]

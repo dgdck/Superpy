@@ -125,6 +125,7 @@ def sold_log(product_name, amount, sell_price, buy_id):
 
 
 def find_product(product_name='0', filename='inventory.csv'):
+    # Finds product in .csv-file and returns list of dictionaries
     if product_name == '0':
         return csvreader(filename)
     list = csvreader(filename)
@@ -134,9 +135,12 @@ def find_product(product_name='0', filename='inventory.csv'):
             found_list.append(dict)
     return found_list
 
-########################################################################################################
-def report_product(product_name='0', mode='inventory', begin_date='0001-01-01', end_date='9999-12-31'):
-    report_list = find_product(product_name)
+
+def report_product(product_name='0', filename='inventory.csv', mode='inventory', begin_date='0001-01-01', end_date='9999-12-31'):
+    # Finds product in specified log between specified dates and returns list of dictionaries
+    # Returns whole inventory-log if nothing is specified
+
+    report_list = find_product(product_name, filename)
     final_list = []
     begin_date = convert_time(begin_date)
     end_date = convert_time(end_date)
@@ -145,14 +149,13 @@ def report_product(product_name='0', mode='inventory', begin_date='0001-01-01', 
             time = convert_time(dict['buy_date'])
             if time >= begin_date and time <= end_date:
                 final_list.append(dict)
+    elif mode == 'sell':
+            for dict in report_list:
+                time = convert_time(dict['sell_date'])
+                if time >= begin_date and time <= end_date:
+                    final_list.append(dict)
     return final_list
     
-
-
-def find_product_date(find_date, date_specification='expiration', filename='inventory.csv'):
-
-    pass
-################################################################################################## 
 
 def sum_inventory(product_name):
     list = find_product(product_name)

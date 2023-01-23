@@ -7,6 +7,7 @@ def main():
 
 
 def table(filename='inventory.csv'):
+    # Table input is list of dictionaries or csv-file
     # Specify the Column Names while initializing the Table
     myTable = PrettyTable(table_header(filename))
 
@@ -17,8 +18,8 @@ def table(filename='inventory.csv'):
     return myTable
 
 
-# Table input is list of dictionaries or csv-file
 def table_header(filename='inventory.csv'):
+    # Table input is list of dictionaries or csv-file
     if type(filename) == list:
         fieldnames = [*filename[0]]
     elif '.csv' in filename:
@@ -28,6 +29,7 @@ def table_header(filename='inventory.csv'):
 
 
 def table_values(filename='inventory.csv'):
+    # Table input is list of dictionaries or csv-file
     if type(filename) == list:
         input = filename
     elif '.csv' in filename:

@@ -2,7 +2,7 @@
 import argparse
 import sys
 from date import current_time, set_time, advance_time
-from main import buy, sold, reset, find_product
+from main import buy, sold, reset, report_product
 from table import table
 
 
@@ -164,7 +164,8 @@ def parse_args(argv=None):
             filename = 'bought.csv'
         elif args.mode == 'sell':
             filename = 'sold.csv'
-        list = find_product(args.product_name, filename)
+        list = report_product(args.product_name, filename, args.mode)
+        print(f'\n{args.mode} report')
         print(table(list))
         
 
