@@ -1,14 +1,15 @@
 # Imports
 import os
 from pathlib import Path
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 
 
 def main():
     #set_time()
     #print(current_time())
     # print(advance_time(2))
-    print(convert_time('1999-01-12'))
+    #print(convert_time('1999-01-12'))
+    print(expired_products('2024-01-01'))
 
 
 def validate_time(date):
@@ -72,7 +73,27 @@ def advance_time(add_days):
     date_current = find_date() + timedelta(days=add_days)
     content = date_current.strftime("%Y-%m-%d")
     Path(workdir).write_text(content)
+    expired_products(content)
     return f'Today is: {Path(workdir).read_text()}'
+
+########################################################################
+def expired_products(today):
+    from main import csvreader, csvwriter
+
+    products = csvreader('inventory.csv')
+    date_today = convert_time(today)
+    expired = []
+
+    for dict in products:
+        expiration_date = convert_time(dict['expiration_date'])
+        if date_today > expiration_date:
+            expired.append(dict)
+    
+    return expired
+
+
+def expired_log():
+    pass
 
 
 def find_date():

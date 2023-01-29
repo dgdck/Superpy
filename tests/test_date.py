@@ -2,6 +2,7 @@
 import date
 import datetime
 from main import read_txtfile
+from demo import execute
 
 
 def test_validate_time():
@@ -41,3 +42,10 @@ def test_find_date():
 
 def test_convert_time():
         assert date.convert_time('2022-01-02') == datetime.datetime(2022, 1, 2, 0, 0)
+
+
+def test_expiration_date():
+        execute(1)
+        assert date.expired_products('2021-02-02') == []
+        assert date.expired_products('2023-02-02') == [{'id': '1', 'product_name': 'apple', 'amount': '3.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '1.5', 'expiration_date': '2023-02-01'}]
+        assert date.expired_products('9999-02-02') == [{'id': '1', 'product_name': 'apple', 'amount': '3.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '1.5', 'expiration_date': '2023-02-01'}, {'id': '2', 'product_name': 'biscuits', 'amount': '4.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '3.0', 'expiration_date': '2024-01-01'}, {'id': '3', 'product_name': 'detergent', 'amount': '19.0', 'buy_id': '3', 'buy_date': '2022-01-01', 'buy_price': '10.0', 'expiration_date': '2030-12-31'}]

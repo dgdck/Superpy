@@ -186,6 +186,5 @@ def parse_args(argv=None):
         print(table(list))
         
 
-
 if __name__ == '__main__':
     sys.exit(parse_args())
