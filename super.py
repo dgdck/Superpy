@@ -4,6 +4,7 @@ import sys
 from date import current_time, set_time, advance_time
 from main import buy, sold, reset, report_product
 from table import table
+from demo import execute
 
 
 # Create the parser
@@ -23,6 +24,9 @@ def parse_args(argv=None):
     parser.add_argument('--reset',
     action='store_true',
     help='reset the program')
+
+    parser.add_argument('--demo',
+    help='load demo x times')
 
 
     # Date settings
@@ -126,7 +130,7 @@ def parse_args(argv=None):
         '--mode',
         metavar='mode',
         default='inventory',
-        help='inventory/revenue/buy/sell'
+        help='inventory/revenue/buy/sell/expired'
     )
 
     reportparser.add_argument(
@@ -153,6 +157,11 @@ def parse_args(argv=None):
     if args.reset:
         reset()
         print('reset done')
+    
+
+    if args.demo:
+        execute(int(args.demo))
+        print(f'Demo loaded with {args.demo} repeats')
 
 
     if args.command == 'date':
@@ -181,6 +190,8 @@ def parse_args(argv=None):
             filename = 'bought.csv'
         elif args.mode == 'sell':
             filename = 'sold.csv'
+        elif args.mode == 'expired':
+            filename = 'expired.csv'
         list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
         print(f'\n{args.mode} report')
         print(table(list))
