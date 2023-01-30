@@ -11,6 +11,7 @@ def test_reset():
     assert main.csvreader('bought.csv') == []
     assert main.csvreader('inventory.csv') == []
     assert main.csvreader('sold.csv') == []
+    assert main.csvreader('expired.csv') == []
     assert main.read_txtfile('inventory_id.txt') == '0'
     assert main.read_txtfile('date.txt') == '2022-01-01'
 
@@ -160,3 +161,20 @@ def test_report_product_sell():
 def test_report_error():
     with pytest.raises(ValueError):
         main.report_product(begin_date='9999-12-30')
+
+
+def test_expired_log():
+    main.reset()
+    main.buy('apple', '2022-01-03', '2')
+    main.buy('pear', '2022-01-05', '2')
+    assert main.csvreader('expired.csv') == []
+    assert main.csvreader('inventory.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-03'}, {'id': '2', 'product_name': 'pear', 'amount': '2.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-05'}]
+    date.advance_time(2)
+    assert main.csvreader('expired.csv') == []
+    assert main.csvreader('inventory.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-03'}, {'id': '2', 'product_name': 'pear', 'amount': '2.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-05'}]
+    date.advance_time(1)
+    assert main.csvreader('expired.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-03'}]
+    assert main.csvreader('inventory.csv') == [{'id': '2', 'product_name': 'pear', 'amount': '2.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-05'}]
+    date.advance_time(2)
+    assert main.csvreader('expired.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-03'}, {'id': '2', 'product_name': 'pear', 'amount': '2.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '1.0', 'expiration_date': '2022-01-05'}]
+    assert main.csvreader('inventory.csv') == []

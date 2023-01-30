@@ -124,6 +124,20 @@ def sold_log(product_name, amount, sell_price, buy_id):
         csvwriter(filename, values)
 
 
+def expired_log(products):
+    filename = 'expired.csv'
+    id = read_lines(filename)
+    header = ['id', 'product_name', 'amount', 'buy_id', 'buy_date', 'buy_price', 'expiration_date']
+    values = products
+    if id == 0:
+        csvwriter(filename, header)
+        expired_log(values)
+    elif id > 0:
+        for item in values:
+            remove_product(item['id'])
+            csvwriter(filename, item.values())
+
+
 def find_product(product_name='0', filename='inventory.csv'):
     # Finds product in .csv-file and returns list of dictionaries
     if product_name == '0':
@@ -198,6 +212,7 @@ def reset():
     truncate_file('bought.csv')
     truncate_file('inventory.csv')
     truncate_file('sold.csv')
+    truncate_file('expired.csv')
     overwrite_txtfile('inventory_id.txt', str(0))
     set_time()
 

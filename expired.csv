@@ -1,1 +1,1 @@
-"{'id': '7', 'product_name': 'apple', 'amount': '5.0', 'buy_id': '7', 'buy_date': '2022-01-05', 'buy_price': '1.5', 'expiration_date': '2023-02-01'}","{'id': '10', 'product_name': 'apple', 'amount': '5.0', 'buy_id': '10', 'buy_date': '2022-01-07', 'buy_price': '1.5', 'expiration_date': '2023-02-01'}","{'id': '13', 'product_name': 'apple', 'amount': '5.0', 'buy_id': '13', 'buy_date': '2022-01-09', 'buy_price': '1.5', 'expiration_date': '2023-02-01'}"
+id,product_name,amount,buy_id,buy_date,buy_price,expiration_date

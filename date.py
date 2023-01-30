@@ -78,7 +78,7 @@ def advance_time(add_days):
 
 ########################################################################
 def expired_products(today):
-    from main import csvreader, csvwriter
+    from main import csvreader, expired_log
 
     products = csvreader('inventory.csv')
     date_today = convert_time(today)
@@ -88,12 +88,8 @@ def expired_products(today):
         expiration_date = convert_time(dict['expiration_date'])
         if date_today > expiration_date:
             expired.append(dict)
-    
+    expired_log(expired)
     return expired
-
-
-def expired_log():
-    pass
 
 
 def find_date():
