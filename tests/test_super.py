@@ -6,6 +6,13 @@ def test_parser_reset(capsys):
     captured = capsys.readouterr()
     assert captured.out == 'reset done\n'
 
+
+def test_parser_demo(capsys):
+    super.parse_args(['--demo', '1'])
+    captured = capsys.readouterr()
+    assert 'Demo'in captured.out
+
+
 # Test commands: date
 def test_parser_current_time_short(capsys):
     super.parse_args(['date', '-c'])
@@ -88,3 +95,9 @@ def test_parser_report_sell(capsys):
     super.parse_args(['report', '-m', 'sell', '-ds', '0001-01-01', '-u', '9999-12-31'])
     captured = capsys.readouterr()
     assert '\nsell' in captured.out
+
+
+def test_parser_report_expired(capsys):
+    super.parse_args(['report', '-m', 'expired', '-ds', '0001-01-01', '-u', '9999-12-31'])
+    captured = capsys.readouterr()
+    assert '\nexpired' in captured.out
