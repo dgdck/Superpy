@@ -11,7 +11,8 @@ def execute(x):
 
 
 def buyloop():
-    main.buy('apple', '2023-02-01', '5', '1.5')
+    main.buy('apple', '2022-01-01', '5', '1.5')
+    main.buy('apple', '2022-02-01', '5', '1.5')
     main.buy('biscuits', '2024-01-01', '5', '3')
     main.buy('detergent', '2030-12-31', '20', '10')
 
