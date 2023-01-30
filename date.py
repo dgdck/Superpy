@@ -60,6 +60,7 @@ def current_time():
 
 
 def advance_time(add_days):
+    # Advances time with x days and starts function that checks for expired products
     """
     >>> set_time()
     'Time is set as: 2022-01-01'
