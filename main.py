@@ -125,6 +125,7 @@ def sold_log(product_name, amount, sell_price, buy_id):
 
 
 def expired_log(products):
+    # logs expired products and removes products from inventory
     filename = 'expired.csv'
     id = read_lines(filename)
     header = ['id', 'product_name', 'amount', 'buy_id', 'buy_date', 'buy_price', 'expiration_date']
@@ -164,10 +165,15 @@ def report_product(product_name='0', filename='inventory.csv', mode='inventory',
             if time >= begin_date and time <= end_date:
                 final_list.append(dict)
     elif mode == 'sell':
-            for dict in report_list:
-                time = convert_time(dict['sell_date'])
-                if time >= begin_date and time <= end_date:
-                    final_list.append(dict)
+        for dict in report_list:
+            time = convert_time(dict['sell_date'])
+            if time >= begin_date and time <= end_date:
+                final_list.append(dict)
+    elif mode == 'expired':
+        for dict in report_list:
+            time = convert_time(dict['expiration_date'])
+            if time >= begin_date and time <= end_date:
+                final_list.append(dict)
     if final_list == []:
         raise ValueError(f'No record found between {begin_date} and {end_date}')
     return final_list
