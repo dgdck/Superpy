@@ -145,35 +145,42 @@ def find_product(product_name='0', filename='inventory.csv'):
         return csvreader(filename)
     list = csvreader(filename)
     found_list = []
-    for dict in list:
-        if dict['product_name'] == product_name:
-            found_list.append(dict)
+    for item in list:
+        if item['product_name'] == product_name:
+            found_list.append(item)
     return found_list
 
 ################### Add expiration ##############################
 def report_product(product_name='0', filename='inventory.csv', mode='inventory', begin_date='0001-01-01', end_date='9999-12-31'):
     # Finds product in specified log between specified dates and returns list of dictionaries
     # Returns whole inventory-log if nothing is specified
-
-    report_list = find_product(product_name, filename)
     final_list = []
     begin_date = convert_time(begin_date)
     end_date = convert_time(end_date)
-    if mode == 'inventory' or mode == 'buy':
-        for dict in report_list:
-            time = convert_time(dict['buy_date'])
+    if mode == 'inventory':
+        report_list = find_product(product_name, filename)
+        for item in report_list:
+            time = convert_time(item['buy_date'])
             if time >= begin_date and time <= end_date:
-                final_list.append(dict)
+                final_list.append(item)
+    elif mode == 'buy':
+        report_list = find_product(product_name, filename='bought.csv')
+        for item in report_list:
+            time = convert_time(item['buy_date'])
+            if time >= begin_date and time <= end_date:
+                final_list.append(item)
     elif mode == 'sell':
-        for dict in report_list:
-            time = convert_time(dict['sell_date'])
+        report_list = find_product(product_name, filename='sold.csv')
+        for item in report_list:
+            time = convert_time(item['sell_date'])
             if time >= begin_date and time <= end_date:
-                final_list.append(dict)
+                final_list.append(item)
     elif mode == 'expired':
-        for dict in report_list:
-            time = convert_time(dict['expiration_date'])
+        report_list = find_product(product_name, filename='expired.csv')
+        for item in report_list:
+            time = convert_time(item['expiration_date'])
             if time >= begin_date and time <= end_date:
-                final_list.append(dict)
+                final_list.append(item)
     if final_list == []:
         raise ValueError(f'No record found between {begin_date} and {end_date}')
     return final_list
@@ -182,8 +189,8 @@ def report_product(product_name='0', filename='inventory.csv', mode='inventory',
 def sum_inventory(product_name):
     list = find_product(product_name)
     total = 0
-    for dict in list:
-        total += float(dict['amount'])
+    for item in list:
+        total += float(item['amount'])
     return total
 
 
@@ -193,12 +200,12 @@ def update_inventory(id, key, value, filename='inventory.csv'):
     with open(filename, mode='w', newline='') as file:
         write = csv.DictWriter(file, fieldnames, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         write.writeheader()
-        for dict in list:
-            if dict['id'] == id:
-                dict.update({key: value})
-                write.writerow(dict)
-            elif dict['id'] != id:
-                write.writerow(dict)
+        for item in list:
+            if item['id'] == id:
+                item.update({key: value})
+                write.writerow(item)
+            elif item['id'] != id:
+                write.writerow(item)
 
 
 def remove_product(id, filename='inventory.csv'):
@@ -207,9 +214,9 @@ def remove_product(id, filename='inventory.csv'):
     with open(filename, mode='w', newline='') as file:
         write = csv.DictWriter(file, fieldnames, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         write.writeheader()
-        for dict in list:
-            if dict['id'] != id:
-                write.writerow(dict)
+        for item in list:
+            if item['id'] != id:
+                write.writerow(item)
 
 
 # Filemanipulation tools
