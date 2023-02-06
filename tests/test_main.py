@@ -12,6 +12,7 @@ def test_reset():
     assert main.csvreader('inventory.csv') == []
     assert main.csvreader('sold.csv') == []
     assert main.csvreader('expired.csv') == []
+    assert main.csvreader('revenue.csv') == []
     assert main.read_txtfile('inventory_id.txt') == '0'
     assert main.read_txtfile('date.txt') == '2022-01-01'
 

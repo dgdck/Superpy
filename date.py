@@ -71,8 +71,10 @@ def advance_time(add_days):
     
     """
     workdir = os.path.join(os.getcwd(), 'date.txt')
-    date_current = find_date() + timedelta(days=add_days)
-    content = date_current.strftime("%Y-%m-%d")
+    date_current = find_date()
+    next_date = date_current + timedelta(days=add_days)
+    content = next_date.strftime("%Y-%m-%d")
+
     Path(workdir).write_text(content)
     expired_products(content)
     return f'Today is: {Path(workdir).read_text()}'

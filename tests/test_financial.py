@@ -30,3 +30,8 @@ def test_investments_on_date():
 def test_revenue_on_date():
     demo.execute(2)
     assert financial.revenue('2022-01-03', '2022-01-03') == -211.1
+
+
+def test_end_of_day():
+    demo.execute(1)
+    assert financial.end_of_day('2022-01-03') == 'Done'

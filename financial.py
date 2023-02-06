@@ -1,4 +1,4 @@
-from main import report_product
+from main import report_product, csvwriter, read_lines
 
 
 def main():
@@ -28,6 +28,22 @@ def income(date_1='0001-01-01', date_2='9999-12-31'):
     for item in list_income:
         total_income += (float(item['sell_price']) * float(item['amount']))
     return round(total_income, 2)
+
+
+def end_of_day(revenue_date, filename='revenue.csv'):
+    id = read_lines(filename)
+    header = ['date', 'costs', 'income', 'revenue']
+    write_costs = investments()
+    write_income = income()
+    write_revenue = revenue()
+    values = [revenue_date, write_costs, write_income, write_revenue]
+
+    if id == 0:
+        csvwriter(filename, header)
+        csvwriter(filename, values)
+    elif id > 0:
+        csvwriter(filename, values)
+    return 'Done'
 
 
 if __name__ == '__main__':
