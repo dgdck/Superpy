@@ -2,9 +2,9 @@ from main import report_product
 
 
 def main():
-    print(income())
-    print(investments())
-    print(revenue())
+    print(income('2022-01-01', '2022-01-01'))
+    print(investments('2022-01-01', '2022-01-01'))
+    print(revenue('2022-01-01', '2022-01-01'))
 
 
 def revenue(date_1='0001-01-01', date_2='9999-12-31'):

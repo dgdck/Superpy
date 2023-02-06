@@ -77,7 +77,7 @@ def advance_time(add_days):
     expired_products(content)
     return f'Today is: {Path(workdir).read_text()}'
 
-########################################################################
+
 def expired_products(today):
     from main import csvreader, expired_log
 
@@ -85,10 +85,10 @@ def expired_products(today):
     date_today = convert_time(today)
     expired = []
 
-    for dict in products:
-        expiration_date = convert_time(dict['expiration_date'])
+    for item in products:
+        expiration_date = convert_time(item['expiration_date'])
         if date_today > expiration_date:
-            expired.append(dict)
+            expired.append(item)
     expired_log(expired)
     return expired
 
