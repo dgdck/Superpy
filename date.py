@@ -60,7 +60,9 @@ def current_time():
 
 
 def advance_time(add_days):
-    # Advances time with x days and starts function that checks for expired products
+    # Advances time with x days
+    # Executes function that checks for expired products
+    # Executes function that writes end of day revenue
     """
     >>> set_time()
     'Time is set as: 2022-01-01'
@@ -70,13 +72,19 @@ def advance_time(add_days):
     'Today is: 2022-01-03'
     
     """
+    from financial import end_of_day
+
     workdir = os.path.join(os.getcwd(), 'date.txt')
     date_current = find_date()
-    next_date = date_current + timedelta(days=add_days)
-    content = next_date.strftime("%Y-%m-%d")
+    end_of_day(date_current.strftime("%Y-%m-%d"))
 
+    next_date = date_current + timedelta(days=add_days)
+    
+    content = next_date.strftime("%Y-%m-%d")
     Path(workdir).write_text(content)
+
     expired_products(content)
+
     return f'Today is: {Path(workdir).read_text()}'
 
 

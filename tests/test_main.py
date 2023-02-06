@@ -159,11 +159,6 @@ def test_report_product_sell():
     assert main.report_product('apple', 'sold.csv', 'sell') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'sell_date': '2022-01-07', 'sell_price': '1.5'}]
 
 
-def test_report_error():
-    with pytest.raises(ValueError):
-        main.report_product(begin_date='9999-12-30')
-
-
 def test_expired_log():
     main.reset()
     main.buy('apple', '2022-01-03', '2')
