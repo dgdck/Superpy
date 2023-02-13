@@ -7,6 +7,10 @@ from main import csvreader
 
 
 def main():
+     my_plotter()
+    
+
+def my_plotter():
     data = csvreader('revenue.csv')
     x = []
     y = []
@@ -30,14 +34,6 @@ def main():
     plt.ylabel("EUR")
     plt.grid()
     plt.show()
-
-
-def my_plotter(ax, data1, data2, param_dict):
-    """
-    A helper function to make a graph.
-    """
-    out = ax.plot(data1, data2, **param_dict)
-    return out
 
 
 if __name__ == '__main__':

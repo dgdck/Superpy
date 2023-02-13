@@ -10,7 +10,8 @@ def main():
 def revenue(date_1='0001-01-01', date_2='9999-12-31'):
     money_in = income(date_1, date_2)
     money_out = investments(date_1, date_2)
-    revenue =  money_in - money_out
+    revenue_lost = lost(date_1, date_2)
+    revenue =  money_in - money_out - revenue_lost
     return round(revenue, 2)
 
 
@@ -28,6 +29,14 @@ def income(date_1='0001-01-01', date_2='9999-12-31'):
     for item in list_income:
         total_income += (float(item['sell_price']) * float(item['amount']))
     return round(total_income, 2)
+
+
+def lost(date_1='0001-01-01', date_2='9999-12-31'):
+    list_lost = report_product(mode='expired', begin_date=date_1, end_date=date_2)
+    total_lost = 0
+    for item in list_lost:
+        total_lost += (float(item['buy_price']) * float(item['amount']))
+    return round(total_lost, 2)
 
 
 def end_of_day(revenue_date, filename='revenue.csv'):
