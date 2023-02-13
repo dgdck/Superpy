@@ -1,12 +1,34 @@
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+import datetime
+from matplotlib.dates import AutoDateLocator, AutoDateFormatter
+from main import csvreader
+
 
 def main():
-    data1, data2, data3, data4 = np.random.randn(4, 100)  # make 4 random data sets
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(5, 2.7))
-    my_plotter(ax1, data1, data2, {'marker': 'x'})
-    my_plotter(ax2, data3, data4, {'marker': 'o'})
+    data = csvreader('revenue.csv')
+    x = []
+    y = []
+    for item in data:
+           x.append(datetime.datetime.strptime(item['date'], '%Y-%m-%d'))
+           y.append(float(item['revenue']))
+    
+    # create plots:
+    figure, axes = plt.subplots()
+        
+    # format date
+    locator = AutoDateLocator()
+    axes.xaxis.set_major_locator(locator)
+    axes.xaxis.set_major_formatter(AutoDateFormatter(locator))
+    
+    figure.autofmt_xdate()
+    
+    plt.plot(x, y, marker='o')
+    plt.title('Revenue')
+    plt.xlabel("time")
+    plt.ylabel("EUR")
+    plt.grid()
     plt.show()
 
 
