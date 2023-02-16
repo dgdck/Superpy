@@ -1,6 +1,6 @@
 import main
 import date
-import pytest
+import demo
 
 testfile = r'tests\testfile.csv'
 
@@ -136,7 +136,7 @@ def test_remove_product():
     assert main.csvreader(testfile) == [{'id': '2', 'update': 'stays'}]
 
 
-def test_report_product_buy():
+def test_report_product_inventory():
     main.reset()
     main.buy('apple', '2023-01-01', '2')
     main.buy('pear', '2023-01-01', '2')
@@ -152,11 +152,31 @@ def test_report_product_buy():
     assert main.report_product(begin_date='2022-01-02', end_date='2022-01-03') == [{'amount': '2.0', 'buy_date': '2022-01-03', 'buy_id': '3', 'buy_price': '1.0', 'expiration_date': '2023-01-01', 'id': '3', 'product_name': 'apple'},{'amount': '2.0', 'buy_date': '2022-01-03', 'buy_id': '4', 'buy_price': '1.0', 'expiration_date': '2023-01-01', 'id': '4', 'product_name': 'pear'}]
 
 
-def test_report_product_sell():
+def test_report_product_sold_apple():
     date.advance_time(2)
     main.sold('apple', '2', '1.5')
     main.sold('pear', '2', '2')
-    assert main.report_product('apple', 'sold.csv', 'sell') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'sell_date': '2022-01-07', 'sell_price': '1.5'}]
+    assert main.report_product('apple', mode='sell') == [{'id': '1', 'product_name': 'apple', 'amount': '2.0', 'buy_id': '1', 'sell_date': '2022-01-07', 'sell_price': '1.5'}]
+
+
+def test_report_product_buy():
+    demo.execute(1)
+    assert main.report_product(mode='buy') == main.csvreader('bought.csv')
+
+
+def test_report_product_sold():
+    demo.execute(1)
+    assert main.report_product(mode='sell') == main.csvreader('sold.csv')
+
+
+def test_report_product_expired():
+    demo.execute(1)
+    assert main.report_product(mode='expired') == main.csvreader('expired.csv')
+
+
+def test_report_product_revenue():
+    demo.execute(1)
+    assert main.report_product(mode='revenue') == main.csvreader('revenue.csv')
 
 
 def test_expired_log():

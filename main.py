@@ -181,6 +181,12 @@ def report_product(product_name='0', filename='inventory.csv', mode='inventory',
             time = convert_time(item['expiration_date'])
             if time >= begin_date and time <= end_date:
                 final_list.append(item)
+    elif mode == 'revenue':
+        report_list = find_product(product_name, filename='revenue.csv')
+        for item in report_list:
+            time = convert_time(item['date'])
+            if time >= begin_date and time <= end_date:
+                final_list.append(item)
     return final_list
     
 
