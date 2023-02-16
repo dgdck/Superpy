@@ -50,11 +50,12 @@ def lost(date_1='0001-01-01', date_2='9999-12-31'):
 
 def end_of_day(revenue_date, filename='revenue.csv'):
     id = read_lines(filename)
-    header = ['date', 'costs', 'income', 'revenue']
+    header = ['date', 'costs', 'income', 'lost', 'revenue']
     write_costs = investments()
     write_income = income()
+    write_lost = lost()
     write_revenue = revenue()
-    values = [revenue_date, write_costs, write_income, write_revenue]
+    values = [revenue_date, write_costs, write_income, write_lost, write_revenue]
 
     if id == 0:
         csvwriter(filename, header)

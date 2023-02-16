@@ -192,6 +192,8 @@ def parse_args(argv=None):
             filename = 'sold.csv'
         elif args.mode == 'expired':
             filename = 'expired.csv'
+        elif args.mode == 'revenue':
+            filename = 'revenue.csv'
         list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
         print(f'\n{args.mode} report')
         print(table(list))
