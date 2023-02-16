@@ -1,10 +1,10 @@
 from main import report_product, csvwriter, read_lines
+from date import find_date
+from datetime import datetime
 
 
 def main():
-    print(income('2022-01-01', '2022-01-01'))
-    print(investments('2022-01-01', '2022-01-01'))
-    print(revenue('2022-01-01', '2022-01-01'))
+    print(revenue_today())
 
 
 def revenue(date_1='0001-01-01', date_2='9999-12-31'):
@@ -13,6 +13,15 @@ def revenue(date_1='0001-01-01', date_2='9999-12-31'):
     revenue_lost = lost(date_1, date_2)
     revenue =  money_in - money_out - revenue_lost
     return round(revenue, 2)
+
+
+def revenue_today():
+    today = str(datetime.strftime(find_date(), '%Y-%m-%d'))
+    money_in = income(today, today)
+    money_out = investments(today, today)
+    revenue_lost = investments(today, today)
+    revenue = money_in - money_out - revenue_lost
+    return revenue
 
 
 def investments(date_1='0001-01-01', date_2='9999-12-31'):

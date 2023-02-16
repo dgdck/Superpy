@@ -22,6 +22,11 @@ def test_revenue():
     assert financial.revenue() == -437.2
 
 
+def test_revenue_today():
+    demo.execute(1)
+    assert financial.revenue_today() == 18.9
+
+
 def test_income_on_date():
     demo.execute(2)
     assert financial.income('2022-01-03', '2022-01-03') == 18.9
