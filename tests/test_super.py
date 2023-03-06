@@ -1,4 +1,7 @@
 import super
+import matplotlib.pyplot as plt
+from mock import patch
+
 
 # Test main options
 def test_parser_reset(capsys):
@@ -101,3 +104,11 @@ def test_parser_report_expired(capsys):
     super.parse_args(['report', '-m', 'expired', '-ds', '0001-01-01', '-u', '9999-12-31'])
     captured = capsys.readouterr()
     assert '\nexpired' in captured.out
+
+
+def test_parser_report_revenue(capsys):
+    plt.ion()
+    super.parse_args(['report', '-m', 'revenue', '-ds', '0001-01-01', '-u', '9999-12-31'])
+    captured = capsys.readouterr()
+    plt.close('all')
+    assert '\nrevenue' in captured.out

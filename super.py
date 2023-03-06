@@ -5,6 +5,7 @@ from date import current_time, set_time, advance_time
 from main import buy, sold, reset, report_product
 from table import table
 from demo import execute
+from plot import plot_revenue
 
 
 # Create the parser
@@ -192,8 +193,11 @@ def parse_args(argv=None):
             filename = 'sold.csv'
         elif args.mode == 'expired':
             filename = 'expired.csv'
-        #elif args.mode == 'revenue':
-         #   filename = 'revenue.csv'
+        elif args.mode == 'revenue':
+            filename = 'revenue.csv'
+            list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
+            print(f'\n{args.mode} report') 
+            return plot_revenue(list)
         list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
         print(f'\n{args.mode} report')
         print(table(list))

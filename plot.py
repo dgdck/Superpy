@@ -3,15 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import datetime
 from matplotlib.dates import AutoDateLocator, AutoDateFormatter
-from main import csvreader
 
 
 def main():
      plot_revenue()
     
 
-def plot_revenue():
-    data = csvreader('revenue.csv')
+def plot_revenue(data, show=True):
+    # Data input must be list of dictionaries
     x = []
     y_costs = []
     y_income = []
@@ -29,7 +28,7 @@ def plot_revenue():
     figure, axes = plt.subplots()
         
     # format date:
-    locator = AutoDateLocator()
+    locator = AutoDateLocator(minticks=1)
     axes.xaxis.set_major_locator(locator)
     axes.xaxis.set_major_formatter(AutoDateFormatter(locator))
     figure.autofmt_xdate()
