@@ -24,9 +24,9 @@ To see the main menu type:
 \
 For each command you can bring up their menu with -h :
 > - py super.py **date** -h
-> - py super.py **buy** -h
-> - py super.py **sell** -h
-> - py super.py **report** -h
+> - py super.py buy -h
+> - py super.py sell -h
+> - py super.py report -h
 
 
 ---

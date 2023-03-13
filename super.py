@@ -27,6 +27,7 @@ def parse_args(argv=None):
     help='reset the program')
 
     parser.add_argument('--demo',
+    metavar='x',
     help='load demo x times')
 
 
