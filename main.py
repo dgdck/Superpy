@@ -13,28 +13,7 @@ __human_name__ = "superpy"
 
 # Your code below this line.
 def main():
-    #buy('orange', '2022-12-01', 1, 5.6)
-    #buy('apple', '2022-12-01', '2', '2.3')
-    #print(read_txtfile('inventory_id.txt'))
-    #print(remove_product('7'))
-    #print(read_lines('bought.csv'))
-    #print(find_product('apple'))
-    #print(sum_inventory('apple'))
-    #print(sold('apple', 3, 2))
-    #print(find_product())
-    #print(read_txtfile('bought.csv'))
-    #print(csvreader('bought.csv'))
-    #print(csvreader('sold.csv'))
-    #print(csvreader('inventory.csv'))
-    #print(csvreader(r'tests\testfile.csv'))
-    print(report_product('apple', 'inventory', end_date='2022-01-08'))
-    #buy_more(30)
-    #reset()
-        
-def buy_more(x):
-    while x >= 0:
-        buy('toilet paper', '9999-01-01', 10, 3)
-        x -= 1
+    pass
 
 
 # SuperPy functions
