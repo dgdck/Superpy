@@ -43,15 +43,15 @@ To see the main menu type:
 <br>
 For each command you can bring up their menu with -h :
 
-> -     py super.py **date** -h
-> -     py super.py **buy** -h
-> -     py super.py **sell** -h
-> -     py super.py **report** -h
+> -     py super.py date -h
+> -     py super.py buy -h
+> -     py super.py sell -h
+> -     py super.py report -h
 
 Options for date-command:
->     -c, --current                             returns the current date
->     -ad x, --advance x                        advance time with x days
->     -st [YYYY-MM-DD], --set-time [YYYY-MM-DD] sets time to specified date
+>     -c, --current                        	     	returns the current date
+>     -ad x, --advance x                        	advance time with x days
+>     -st [YYYY-MM-DD], --set-time [YYYY-MM-DD] 	sets time to specified date
 
 Options for buy-command:
 >     -pn product, --product-name product               product to buy
@@ -60,15 +60,15 @@ Options for buy-command:
 >     -p x, --price x                                   price of purchase, default = 1
 
 Options for sell-command:
->     -pn product, --product-name product   product to sell
+>     -pn product, --product-name product  		product to sell
 >     -a x, --amount x      				x amount of product, default = 1
 >     -p x, --price x       				price of product, default = 1
 
 Options for report-command:
->     -pn product, --product-name product	productname
+>     -pn product, --product-name product		productname
 >     -m mode, --mode mode  				inventory/revenue/buy/sell/expired
->     -ds search date from, --date-search	search date from [YYYY-MM-DD]
->	  -u search date until, --until 		search date until [YYYY-MM-DD]
+>     -ds search date from, --date-search		search date from [YYYY-MM-DD]
+>     -u search date until, --until 			search date until [YYYY-MM-DD]
 
 ---
 ### Features
