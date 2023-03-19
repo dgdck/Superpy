@@ -50,8 +50,8 @@ def parse_args(argv=None):
     dateparser.add_argument(
         '-st',
         '--set-time',
-        action='store_true',
-        help='sets time to today'
+        metavar='[YYYY-MM-DD]',
+        help='sets time to specified date'
     )
 
     # Buy products
@@ -176,7 +176,7 @@ def parse_args(argv=None):
             print(advance_time(args.advance))
 
         elif args.set_time:
-            print(set_time())
+            print(set_time(args.set_time))
 
 
     # args buy
