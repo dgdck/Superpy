@@ -52,7 +52,7 @@ def parse_args(argv=None):
         '--set-time',
         nargs='?',
         const='2022-01-01',
-        metavar='[YYYY-MM-DD]',
+        metavar='YYYY-MM-DD',
         help='sets time to specified date'
     )
 
