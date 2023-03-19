@@ -50,6 +50,8 @@ def parse_args(argv=None):
     dateparser.add_argument(
         '-st',
         '--set-time',
+        nargs='?',
+        const='2022-01-01',
         metavar='[YYYY-MM-DD]',
         help='sets time to specified date'
     )
