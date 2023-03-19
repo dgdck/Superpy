@@ -156,6 +156,7 @@ def parse_args(argv=None):
     # Execute the parse_args() method
     args = parser.parse_args(argv)
 
+    # args main menu
     if args.reset:
         reset()
         print('reset done')
@@ -166,6 +167,7 @@ def parse_args(argv=None):
         print(f'Demo loaded with {args.demo} repeats')
 
 
+    # args date
     if args.command == 'date':
         if args.current:
             print(current_time())
@@ -177,14 +179,17 @@ def parse_args(argv=None):
             print(set_time())
 
 
+    # args buy
     if args.command == 'buy':
         print(buy(args.product_name, args.expiration_date, args.amount, args.price))
 
 
+    # args sell
     if args.command == 'sell':
         print(sold(args.product_name, float(args.amount), float(args.price)))
 
-# working on:
+    
+    # args report
     if args.command == 'report':
         if args.mode == 'inventory':
             filename = 'inventory.csv'
