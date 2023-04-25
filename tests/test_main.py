@@ -179,6 +179,13 @@ def test_report_product_revenue():
     assert main.report_product(mode='revenue') == main.csvreader('revenue.csv')
 
 
+def test_expiration_date():
+    demo.execute(1)
+    assert main.expired_products('2021-02-02') == []
+    assert main.expired_products('2023-02-02') == [{'id': '2', 'product_name': 'apple', 'amount': '3.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '1.5', 'expiration_date': '2022-02-01'}]
+    assert main.expired_products('9999-02-02') == [{'id': '3', 'product_name': 'biscuits', 'amount': '4.0', 'buy_id': '3', 'buy_date': '2022-01-01', 'buy_price': '3.0', 'expiration_date': '2024-01-01'}, {'id': '4', 'product_name': 'detergent', 'amount': '19.0', 'buy_id': '4', 'buy_date': '2022-01-01', 'buy_price': '10.0', 'expiration_date': '2030-12-31'}]
+
+
 def test_expired_log():
     main.reset()
     main.buy('apple', '2022-01-03', '2')

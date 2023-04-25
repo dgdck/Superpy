@@ -102,6 +102,19 @@ def sold_log(product_name, amount, sell_price, buy_id):
         csvwriter(filename, values)
 
 
+def expired_products(today):
+    products = csvreader('inventory.csv')
+    date_today = convert_time(today)
+    expired = []
+
+    for item in products:
+        expiration_date = convert_time(item['expiration_date'])
+        if date_today > expiration_date:
+            expired.append(item)
+    expired_log(expired)
+    return expired
+
+
 def expired_log(products):
     # logs expired products and removes products from inventory
     filename = 'expired.csv'
