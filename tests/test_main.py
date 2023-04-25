@@ -46,6 +46,7 @@ def test_overwrite_txtfile():
 def test_buy():
     main.reset()
     assert main.buy('apple', 'invalid', '5', '0.5') == 'Error: Please use dateformat [YYYY-MM-DD]'
+    assert main.buy('apple', '1900-01-01', '5', '0.5') == 'Product is already expired.'
     main.buy('apple', '2023-01-01', '5', '0.5')
     assert main.csvreader('bought.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '5.0', 'buy_date': '2022-01-01', 'buy_price': '0.5', 'expiration_date': '2023-01-01'}]
     assert main.csvreader('inventory.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '5.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '0.5', 'expiration_date': '2023-01-01'}]

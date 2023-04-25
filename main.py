@@ -32,18 +32,21 @@ def buy(product_name, expiration_date, amount='1', buy_price='1'):
     buy_price = float(buy_price)
 
     if validate_date == True:
-        filename = 'bought.csv'
-        id = read_lines(filename)
-        buy_date = read_txtfile('date.txt')
-        header = ['id', 'product_name', 'amount', 'buy_date', 'buy_price', 'expiration_date']
-        values = [id, product_name, amount, buy_date, buy_price, expiration_date]
-        if id == 0:
-            csvwriter(filename, header)
-            buy(product_name, expiration_date, amount, buy_price)
-        elif id > 0:
-            csvwriter(filename, values)
-            add_inventory(product_name, amount, id, buy_date, buy_price, expiration_date)
-        return 'done'
+        if convert_time(expiration_date) < convert_time(read_txtfile('date.txt')):
+            return 'Product is already expired.'
+        else:
+            filename = 'bought.csv'
+            id = read_lines(filename)
+            buy_date = read_txtfile('date.txt')
+            header = ['id', 'product_name', 'amount', 'buy_date', 'buy_price', 'expiration_date']
+            values = [id, product_name, amount, buy_date, buy_price, expiration_date]
+            if id == 0:
+                csvwriter(filename, header)
+                buy(product_name, expiration_date, amount, buy_price)
+            elif id > 0:
+                csvwriter(filename, values)
+                add_inventory(product_name, amount, id, buy_date, buy_price, expiration_date)
+            return 'done'
     else:
         return validate_date
 
