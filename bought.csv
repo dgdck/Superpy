@@ -5,3 +5,4 @@ id,product_name,amount,buy_date,buy_price,expiration_date
 4,detergent,20.0,2022-01-01,10.0,2030-12-31
 5,apple,5.0,2022-01-01,1.5,9999-01-01
 6,apple,5.0,2022-01-01,1.5,9999-01-01
+7,banana,3.0,2022-01-01,1.0,2023-02-02

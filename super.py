@@ -206,9 +206,13 @@ def parse_args(argv=None):
             elif args.mode == 'revenue':
                 filename = 'revenue.csv'
                 list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
+                if list == []:
+                    return print(f'Product Error: {args.product_name} has not been found.')
                 print(f'\n{args.mode} report') 
                 return plot_revenue(list)
             list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
+            if list == []:
+                return print(f'Product Error: {args.product_name} has not been found.')
             print(f'\n{args.mode} report')
             print(table(list))
         else:
