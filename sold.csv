@@ -1,0 +1,7 @@
+id,product_name,amount,buy_id,sell_date,sell_price
+1,apple,2.0,2,2022-01-03,1.7
+2,biscuits,1.0,3,2022-01-03,3.5
+3,detergent,1.0,4,2022-01-03,12.0
+4,apple,2.0,2,2022-01-01,1.7
+5,apple,1.0,2,2022-01-01,1.7
+6,apple,1.0,5,2022-01-01,1.7

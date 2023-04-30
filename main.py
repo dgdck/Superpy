@@ -33,7 +33,7 @@ def buy(product_name, expiration_date, amount='1', buy_price='1'):
 
     if validate_date == True:
         if convert_time(expiration_date) < convert_time(read_txtfile('date.txt')):
-            return 'Product is already expired.'
+            return 'Buy error: Product is already expired and has not been bought.'
         else:
             filename = 'bought.csv'
             id = read_lines(filename)
@@ -68,14 +68,21 @@ def add_inventory(product_name, amount, buy_id, buy_date, buy_price, expiration_
 
 
 def sold(product_name, amount, sell_price):
-    total_inventory = sum_inventory(product_name)
     amount = float(amount)
     sell_price = float(sell_price)
+    products = find_product(product_name) #list of dictionaries
+    product = products[0]
+    today = convert_time(read_txtfile('date.txt'))
+    for item in products:
+        if convert_time(item['expiration_date']) < today:
+                expired_products(read_txtfile('date.txt'))
+                return 'Sell error: A product is expired and has been moved to expired list.'
+        
+    total_inventory = sum_inventory(product_name)
+
     if (total_inventory - amount) < 0:
         return f'Not enough inventory, there are {total_inventory} of {product_name}.'
     elif amount > 0:
-        products = find_product(product_name) #list of dictionaries
-        product = products[0]
         product_inventory = float(product['amount'])
         buy_id = product['buy_id']
         if amount >= product_inventory: #when stock-inventory gets depleted

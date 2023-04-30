@@ -46,7 +46,7 @@ def test_overwrite_txtfile():
 def test_buy():
     main.reset()
     assert main.buy('apple', 'invalid', '5', '0.5') == 'Error: Please use dateformat [YYYY-MM-DD]'
-    assert main.buy('apple', '1900-01-01', '5', '0.5') == 'Product is already expired.'
+    assert 'Buy error:' in main.buy('apple', '1900-01-01', '5', '0.5')
     main.buy('apple', '2023-01-01', '5', '0.5')
     assert main.csvreader('bought.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '5.0', 'buy_date': '2022-01-01', 'buy_price': '0.5', 'expiration_date': '2023-01-01'}]
     assert main.csvreader('inventory.csv') == [{'id': '1', 'product_name': 'apple', 'amount': '5.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '0.5', 'expiration_date': '2023-01-01'}]
@@ -60,6 +60,14 @@ def test_add_inventory():
     assert main.csvreader('inventory.csv') == [
         {'id': '1', 'product_name': 'apple', 'amount': '5.0', 'buy_id': '1', 'buy_date': '2022-01-01', 'buy_price': '0.5', 'expiration_date': '2023-01-01'},
         {'id': '2', 'product_name': 'orange', 'amount': '10.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '0.6', 'expiration_date': '2023-01-20'}]
+
+
+def test_sold_expired():
+    main.reset()
+    main.buy('apple', '2023-01-01', '5', '0.5')
+    main.buy('apple', '2023-01-01', '2', '0.5')
+    main.add_inventory('apple', '99', '99', '2022-01-01', '99', '1900-01-01')
+    assert 'Sell error' in main.sold('apple', '5', '2')
 
 
 def test_sold():
