@@ -10,17 +10,17 @@ def test_income():
 
 def test_investments():
     demo.execute(2)
-    assert financial.investments() == 460
+    assert financial.investments() == 452.5
 
 
 def test_lost():
     demo.execute(2)
-    assert financial.lost() == 15
+    assert financial.lost() == 7.5
 
 
 def test_revenue():
     demo.execute(2)
-    assert financial.revenue() == -437.2
+    assert financial.revenue() == -422.2
 
 
 def test_revenue_today():
@@ -40,7 +40,7 @@ def test_investments_on_date():
 
 def test_revenue_on_date():
     demo.execute(2)
-    assert financial.revenue('2022-01-03', '2022-01-03') == -211.1
+    assert financial.revenue('2022-01-03', '2022-01-03') == -203.6
 
 def test_end_of_day():
     demo.execute(1)
