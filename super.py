@@ -193,23 +193,27 @@ def parse_args(argv=None):
     
     # args report
     if args.command == 'report':
-        if args.mode == 'inventory':
-            filename = 'inventory.csv'
-        elif args.mode == 'buy':
-            filename = 'bought.csv'
-        elif args.mode == 'sell':
-            filename = 'sold.csv'
-        elif args.mode == 'expired':
-            filename = 'expired.csv'
-        elif args.mode == 'revenue':
-            filename = 'revenue.csv'
+        mode_list = ['inventory', 'buy', 'sell', 'expired', 'revenue']
+        if args.mode in mode_list:
+            if args.mode == 'inventory':
+                filename = 'inventory.csv'
+            elif args.mode == 'buy':
+                filename = 'bought.csv'
+            elif args.mode == 'sell':
+                filename = 'sold.csv'
+            elif args.mode == 'expired':
+                filename = 'expired.csv'
+            elif args.mode == 'revenue':
+                filename = 'revenue.csv'
+                list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
+                print(f'\n{args.mode} report') 
+                return plot_revenue(list)
             list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
-            print(f'\n{args.mode} report') 
-            return plot_revenue(list)
-        list = report_product(args.product_name, filename, args.mode, args.date_search, args.until)
-        print(f'\n{args.mode} report')
-        print(table(list))
-        
+            print(f'\n{args.mode} report')
+            print(table(list))
+        else:
+            return print(f'Argument Error: {args.mode}, is not recognized.')
+    
 
 if __name__ == '__main__':
     sys.exit(parse_args())

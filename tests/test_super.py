@@ -106,6 +106,12 @@ def test_parser_report_expired(capsys):
     assert '\nexpired' in captured.out
 
 
+def test_parser_report_error(capsys):
+    super.parse_args(['report', '-m', 'exped', '-ds', '0001-01-01', '-u', '9999-12-31'])
+    captured = capsys.readouterr()
+    assert 'Argument Error' in captured.out
+
+
 def test_parser_report_revenue(capsys):
     plt.ion()
     super.parse_args(['report', '-m', 'revenue', '-ds', '0001-01-01', '-u', '9999-12-31'])
