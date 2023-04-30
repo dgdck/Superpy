@@ -71,6 +71,8 @@ def sold(product_name, amount, sell_price):
     amount = float(amount)
     sell_price = float(sell_price)
     products = find_product(product_name) #list of dictionaries
+    if products == []:
+        return f'Product Error: {product_name} has not been found.'
     product = products[0]
     today = convert_time(read_txtfile('date.txt'))
     for item in products:

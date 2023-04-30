@@ -62,6 +62,12 @@ def test_add_inventory():
         {'id': '2', 'product_name': 'orange', 'amount': '10.0', 'buy_id': '2', 'buy_date': '2022-01-01', 'buy_price': '0.6', 'expiration_date': '2023-01-20'}]
 
 
+def test_sold_product_not_found():
+    main.reset()
+    main.buy('apple', '2023-01-01', '5', '0.5')
+    assert main.sold('appl', '1', '2') == 'Product Error: appl has not been found.'
+
+
 def test_sold_expired():
     main.reset()
     main.buy('apple', '2023-01-01', '5', '0.5')
